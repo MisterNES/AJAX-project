@@ -21,7 +21,6 @@ const upvote = async () => {
     }
 }
 
-
 const downvote = async () => {
     const res = await fetch("/kitten/downvote", {
         method: "PATCH"
@@ -35,6 +34,13 @@ const downvote = async () => {
     }
 }
 
+const newComment = async (comment) => {
+    const res = await fetch("/kitten/comments", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({comments})
+    })
+}
 
 window.addEventListener("DOMContentLoaded", () =>{
 
@@ -63,5 +69,9 @@ window.addEventListener("DOMContentLoaded", () =>{
         score.innerHTML = currValue;
     })
 
-
+    let form = document.querySelector(".comment-form")
+    let comment = document.getElementById("user-comment")
+    form.addEventListener("submit", async () => {
+        let currComment = await newComment(comment)
+    }
 })

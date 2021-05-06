@@ -10,13 +10,12 @@ const fetchPic = async () => {
 
 const upvote = async () => {
     const res = await fetch("/kitten/upvote", {
-        method: "PATCH",
-        headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify({score : kitten.score})
+        method: "PATCH"
     })
+    const json = await res.json();
 
     if (res.ok) {
-        return res.score;
+        return json.score;
     } else {
         window.alert("Upvote isn't working! Sorry!")
     }
@@ -25,13 +24,12 @@ const upvote = async () => {
 
 const downvote = async () => {
     const res = await fetch("/kitten/downvote", {
-        method: "PATCH",
-        headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify({score : kitten.score})
+        method: "PATCH"
     })
+    const json = await res.json();
 
     if (res.ok) {
-        return res.score;
+        return json.score;
     } else {
         window.alert("Downvote isn't working! Sorry!")
     }
@@ -56,12 +54,12 @@ window.addEventListener("DOMContentLoaded", () =>{
     let downvoteButton = document.getElementById("downvote")
 
     upvoteButton.addEventListener("click", async () => {
-        let currValue = await upvote()
+        let currValue = await upvote();
         score.innerHTML = currValue;
     })
 
     downvoteButton.addEventListener("click", async () => {
-        let currValue = await downvote()
+        let currValue = await downvote();
         score.innerHTML = currValue;
     })
 

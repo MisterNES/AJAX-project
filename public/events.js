@@ -40,6 +40,12 @@ const newComment = async (comment) => {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({comments})
     })
+
+    if (res.ok) {
+
+    } else {
+
+    }
 }
 
 window.addEventListener("DOMContentLoaded", () =>{
@@ -71,7 +77,8 @@ window.addEventListener("DOMContentLoaded", () =>{
 
     let form = document.querySelector(".comment-form")
     let comment = document.getElementById("user-comment")
-    form.addEventListener("submit", async () => {
+
+    form.addEventListener("submit", async (event) => {
         let currComment = await newComment(comment)
     }
 })

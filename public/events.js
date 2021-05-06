@@ -35,16 +35,20 @@ const downvote = async () => {
 }
 
 const newComment = async (comment) => {
+    console.log(comment);
     const res = await fetch("/kitten/comments", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({comments})
+        body: JSON.stringify({comment})
     })
 
+    const json = await res.json();
+    console.log(json);
+
     if (res.ok) {
-
+        return json.comments;
     } else {
-
+        window.alert("Comments not working. Please try again later.")
     }
 }
 
@@ -77,8 +81,13 @@ window.addEventListener("DOMContentLoaded", () =>{
 
     let form = document.querySelector(".comment-form")
     let comment = document.getElementById("user-comment")
+    let commentBox = document.querySelector(".comments");
 
     form.addEventListener("submit", async (event) => {
-        let currComment = await newComment(comment)
-    }
+        event.preventDefault();
+        let currComment = await newComment(comment);
+        console.log(currComment);
+
+    });
+
 })
